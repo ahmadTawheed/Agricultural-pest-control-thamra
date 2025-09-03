@@ -1,0 +1,2930 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thamra Tech - المبيدات الزراعية ومكافحة الآفات</title>
+    
+    <!-- مكتبات خارجية -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.min.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap');
+        
+        :root {
+            --primary-color: #2E8B57;
+            --secondary-color: #3CB371;
+            --accent-color: #90EE90;
+            --dark-color: #1B5E20;
+            --light-color: #F1F8E9;
+            --text-color: #263238;
+            --gradient-1: linear-gradient(135deg, #2E8B57, #3CB371);
+            --gradient-2: linear-gradient(135deg, #3CB371, #90EE90);
+            --danger-color: #DC3545;
+            --warning-color: #FFC107;
+            --info-color: #17A2B8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            color: var(--text-color);
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+        }
+        
+        /* شريط التنقل */
+        .navbar {
+            background-color: var(--primary-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white !important;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-brand i {
+            margin-left: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: white !important;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* القسم الرئيسي ثلاثي الأبعاد */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #three-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 15px;
+            max-width: 800px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 1s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--text-color);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .btn-primary-custom {
+            background: var(--gradient-1);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        .btn-primary-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(46, 139, 87, 0.4);
+            color: white;
+        }
+        
+        /* الأقسام */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .card-custom {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+            background-color: white;
+        }
+        
+        .card-custom:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card-img-custom {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .card-body-custom {
+            padding: 1.5rem;
+        }
+        
+        .card-title-custom {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .card-text-custom {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        /* قسم الاختبار */
+        .quiz-section {
+            background-color: var(--light-color);
+            padding: 80px 0;
+        }
+        
+        .quiz-container {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .quiz-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .quiz-timer {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .quiz-progress {
+            height: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        
+        .quiz-progress-bar {
+            height: 100%;
+            background: var(--gradient-1);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .question-container {
+            margin-bottom: 2rem;
+        }
+        
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .answer-option {
+            background-color: #f8f9fa;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .answer-option:hover {
+            background-color: #e9f5e9;
+            border-color: var(--secondary-color);
+        }
+        
+        .answer-option.selected {
+            background-color: #e9f5e9;
+            border-color: var(--primary-color);
+        }
+        
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        
+        .btn-quiz {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-quiz:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .btn-quiz:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        /* نتيجة الاختبار */
+        .result-container {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .result-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .result-score {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .result-message {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .result-chart {
+            max-width: 400px;
+            margin: 0 auto 2rem;
+        }
+        
+        .result-details {
+            text-align: right;
+            margin-bottom: 2rem;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .result-question {
+            font-weight: 600;
+        }
+        
+        .result-status {
+            font-weight: 600;
+        }
+        
+        .result-status.correct {
+            color: #28a745;
+        }
+        
+        .result-status.incorrect {
+            color: #dc3545;
+        }
+        
+        /* تذييل الصفحة */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 1rem;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-left: 10px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* تصميم متجاوب */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .quiz-navigation {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn-quiz {
+                width: 100%;
+            }
+        }
+        
+        /* عناصر تفاعلية جديدة */
+        .interactive-tool {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .tool-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .tool-description {
+            font-size: 1rem;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .form-control, .form-select {
+            border-radius: 10px;
+            border: 1px solid #ced4da;
+            padding: 10px 15px;
+            margin-bottom: 1rem;
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 0.25rem rgba(60, 179, 113, 0.25);
+        }
+        
+        .btn-tool {
+            background: var(--gradient-1);
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 1rem;
+        }
+        
+        .btn-tool:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(46, 139, 87, 0.4);
+            color: white;
+        }
+        
+        .result-box {
+            background-color: var(--light-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border-right: 5px solid var(--primary-color);
+        }
+        
+        .result-box h4 {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .result-box p {
+            margin-bottom: 0.5rem;
+        }
+        
+        .result-box .highlight {
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+        
+        .toxicity-card {
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            color: white;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .toxicity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .toxicity-ia {
+            background-color: #8B0000;
+        }
+        
+        .toxicity-ib {
+            background-color: #CD5C5C;
+        }
+        
+        .toxicity-ii {
+            background-color: #FF8C00;
+        }
+        
+        .toxicity-iii {
+            background-color: #3CB371;
+        }
+        
+        .toxicity-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .toxicity-card p {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .checklist-item:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .checklist-checkbox {
+            margin-left: 1rem;
+            width: 20px;
+            height: 20px;
+            accent-color: var(--primary-color);
+        }
+        
+        .checklist-text {
+            flex: 1;
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+        
+        .simulation-container {
+            position: relative;
+            height: 400px;
+            background-color: var(--light-color);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        
+        .simulation-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .btn-simulation {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-simulation:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .btn-simulation.active {
+            background-color: var(--secondary-color);
+        }
+        
+        .pesticide-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        
+        .pesticide-table th,
+        .pesticide-table td {
+            padding: 12px 15px;
+            text-align: right;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .pesticide-table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .pesticide-table tr:hover {
+            background-color: var(--light-color);
+        }
+        
+        .pesticide-table .badge {
+            font-size: 0.8rem;
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+        
+        .first-aid-alert {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .first-aid-alert i {
+            font-size: 2rem;
+            color: var(--warning-color);
+            margin-left: 1rem;
+        }
+        
+        .first-aid-alert-content {
+            flex: 1;
+        }
+        
+        .first-aid-alert h4 {
+            color: var(--warning-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .first-aid-steps {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .first-aid-steps h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .step-item {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+        
+        .step-number {
+            background-color: var(--primary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-left: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .step-text {
+            flex: 1;
+        }
+        
+        .tab-content {
+            padding: 1.5rem;
+            border: 1px solid #dee2e6;
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .nav-tabs .nav-link {
+            color: var(--primary-color);
+            font-weight: 600;
+            border-radius: 10px 10px 0 0;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-tabs .nav-link.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .nav-tabs .nav-link:hover {
+            border-color: var(--secondary-color);
+            color: var(--secondary-color);
+        }
+        
+        .ipm-step {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-right: 5px solid var(--primary-color);
+        }
+        
+        .ipm-step h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .ipm-step h4 i {
+            margin-left: 0.5rem;
+        }
+        
+        .ipm-step p {
+            margin-bottom: 0;
+        }
+        
+        .formulation-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .formulation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .formulation-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .formulation-card .abbreviation {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-leaf"></i>
+                Thamra Tech
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">الرئيسية</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">عن المبيدات</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#types">أنواع المبيدات</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tools">أدوات تفاعلية</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#safety">السلامة</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#quiz">الاختبار</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- القسم الرئيسي ثلاثي الأبعاد -->
+    <section id="home" class="hero-section">
+        <div id="three-container"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Thamra Tech</h1>
+            <p class="hero-subtitle">دليلك الشامل للمبيدات الزراعية ومكافحة الآفات بأحدث التقنيات وأعلى معايير السلامة</p>
+            <p style="font-weight: bold;" class="hero-subtitle">Made By Ahmed Tawheed</p>
+            <a href="#about" class="btn btn-primary-custom">اكتشف المزيد</a>
+        </div>
+    </section>
+
+    <!-- قسم عن المبيدات -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">مكافحة الآفات الزراعية</h2>
+            
+            <!-- أساسيات مكافحة الآفات -->
+            <div class="row mb-5">
+                <div class="col-lg-8">
+                    <div class="interactive-tool">
+                        <h3 class="tool-title">أساسيات مكافحة الآفات</h3>
+                        <p class="tool-description">تُعَدّ مكافحة الآفات الزراعية ركيزة أساسية لضمان الأمن الغذائي وحماية جودة المحاصيل، وتتطلب فهماً عميقاً وشاملاً للنظام البيئي الزراعي.</p>
+                        
+                        <div class="accordion" id="basicsAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        ما هي الآفة؟
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#basicsAccordion">
+                                    <div class="accordion-body">
+                                        <p>تُعرّف الآفة بأنها أي كائن حي يسبب ضرراً مباشراً أو غير مباشر للإنسان، أو لغذائه، أو لممتلكاته. يمتد هذا التعريف ليشمل مجموعة واسعة من الكائنات الحية، منها:</p>
+                                        <ul>
+                                            <li>الحشرات</li>
+                                            <li>الأكاروسات (العناكب)</li>
+                                            <li>القواقع والقوارض</li>
+                                            <li>النيماتودا (الديدان الأسطوانية)</li>
+                                            <li>النباتات غير المرغوب فيها (الحشائش)</li>
+                                            <li>الفطريات والبكتيريا والفيروسات المسببة لأمراض النباتات</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        لماذا المكافحة مهمة؟
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#basicsAccordion">
+                                    <div class="accordion-body">
+                                        <p>تكمن أهمية المكافحة في الحد من الخسائر الاقتصادية التي تسببها الآفات للمحاصيل، والتي قد تؤدي إلى تدهور جودة المنتج وكميته، مما يهدد الأمن الغذائي.</p>
+                                        <p>الهدف من المكافحة ليس القضاء التام على الآفة، بل تقليل تعدادها إلى مستوى لا يسبب ضرراً اقتصادياً يتجاوز تكلفة المكافحة نفسها، وهو ما يُعرف بـ <span class="highlight">"عتبة الضرر الاقتصادي"</span>.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        كيف تُطبَّق عملياً؟
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#basicsAccordion">
+                                    <div class="accordion-body">
+                                        <p>يجب على المهندس الزراعي قبل اتخاذ قرار المكافحة أن يحصل على معلومات وافية عن الآفة المستهدفة. الخطوات العملية تشمل:</p>
+                                        <ol>
+                                            <li><strong>التحديد الدقيق للآفة:</strong> قد يكون السبب الأساسي في فشل أي عملية مكافحة هو الخطأ في تعريف الآفة. لذا، يُعدّ التحديد الصحيح للآفة المستهدفة خطوة أولى وحاسمة.</li>
+                                            <li><strong>جمع المعلومات:</strong> يتطلب اتخاذ قرار مستنير دراسة شاملة لبيولوجيا الآفة، بما في ذلك دورة حياتها، وسلوكها، وعوائلها المفضلة، وطريقة تغذيتها. هذه المعلومات تمكّن من تحديد أضعف نقطة في حياة الآفة يمكن استهدافها.</li>
+                                            <li><strong>اختيار التوقيت والطريقة:</strong> يعتمد نجاح المكافحة بشكل كبير على اختيار الموعد والطريقة المناسبة. هذا الاختيار قد يكون أكثر أهمية من نوع المبيد نفسه.</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card card-custom">
+                        <img src="https://popsciarabia.com/wp-content/uploads/2022/12/shutterstock_2016134918.jpg" class="card-img-top card-img-custom" alt="أساسيات مكافحة الآفات">
+                        <div class="card-body card-body-custom">
+                            <h3 class="card-title card-title-custom">العوامل الطبيعية المؤثرة</h3>
+                            <p class="card-text card-text-custom">العوامل المناخية مثل الحرارة والرطوبة والرياح، والأعداء الحيوية تلعب دوراً حاسماً في الحد من انتشار الآفات دون تدخل الإنسان.</p>
+                            <ul class="card-text card-text-custom">
+                                <li>الحرارة المرتفعة تقتل الحشرات</li>
+                                <li>الرياح القوية تمنع انتشار الحشرات</li>
+                                <li>الأعداء الحيوية تتغذى على الآفات</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- طرق مكافحة الآفات -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="interactive-tool">
+                        <h3 class="tool-title">طرق مكافحة الآفات</h3>
+                        <p class="tool-description">تتعدد طرق مكافحة الآفات وتتكامل فيما بينها ضمن نهج شامل يهدف إلى تحقيق أقصى فعالية بأقل الأضرار.</p>
+                        
+                        <ul class="nav nav-tabs" id="pestControlTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button style="color: rgb(168, 225, 11) !important;" class="nav-link active" id="natural-tab" data-bs-toggle="tab" data-bs-target="#natural" type="button" role="tab" aria-controls="natural" aria-selected="true">العوامل الطبيعية</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button style="color: rgb(168, 225, 11) !important;" class="nav-link" id="cultural-tab" data-bs-toggle="tab" data-bs-target="#cultural" type="button" role="tab" aria-controls="cultural" aria-selected="false">المكافحة الزراعية</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button style="color: rgb(168, 225, 11) !important;" class="nav-link" id="mechanical-tab" data-bs-toggle="tab" data-bs-target="#mechanical" type="button" role="tab" aria-controls="mechanical" aria-selected="false">المكافحة الميكانيكية</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button style="color: rgb(168, 225, 11) !important;" class="nav-link" id="biological-tab" data-bs-toggle="tab" data-bs-target="#biological" type="button" role="tab" aria-controls="biological" aria-selected="false">المكافحة البيولوجية</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pestControlTabsContent">
+                            <div class="tab-pane fade show active" id="natural" role="tabpanel" aria-labelledby="natural-tab">
+                                <h4>العوامل الطبيعية المؤثرة في مكافحة الآفات</h4>
+                                <p>هي مجموعة من العوامل التي تؤثر على تعداد الآفات وتقلل من انتشارها دون تدخل الإنسان. تشمل هذه العوامل:</p>
+                                <ul>
+                                    <li><strong>العوامل المناخية:</strong> مثل الحرارة، والرطوبة، والرياح، والأمطار، وضوء الشمس. يمكن للحرارة المرتفعة أن تقتل الحشرات مباشرة عبر تجفيف أجسامها، في حين أن الرياح القوية قد تمنع الحشرات الصغيرة من الطيران وتحد من انتشارها.</li>
+                                    <li><strong>العوائق الطبوغرافية:</strong> مثل الجبال والصحاري التي تعمل كحواجز طبيعية تمنع غزو الآفات المهاجرة مثل الجراد.</li>
+                                    <li><strong>الأعداء الحيوية:</strong> هي كائنات حية تتغذى على الآفات أو تتطفل عليها، وتشمل المفترسات (مثل أسد المن)، والطفيليات التي تتطفل على الحشرات، والأمراض التي تسببها الفيروسات أو البكتيريا أو الفطريات للآفات.</li>
+                                </ul>
+                                <p>تعتبر هذه العوامل أساسية لأنها تحافظ على التوازن الطبيعي في النظام البيئي الزراعي. أي تدخل كيميائي غير مدروس يمكن أن يخل بهذا التوازن، مما يؤدي إلى نتائج عكسية على المدى الطويل.</p>
+                            </div>
+                            <div class="tab-pane fade" id="cultural" role="tabpanel" aria-labelledby="cultural-tab">
+                                <h4>المكافحة الزراعية (Cultural Control)</h4>
+                                <p>هي مجموعة من الممارسات الزراعية التي تهدف إلى تقليل أعداد الآفات من خلال تعديل البيئة الزراعية. تشمل:</p>
+                                <ul>
+                                    <li><strong>الدورة الزراعية:</strong> تساهم في قطع دورة حياة الآفة عن طريق زراعة محصول غير مضيف في الموسم التالي.</li>
+                                    <li><strong>اختيار الأصناف المقاومة:</strong> استخدام أصناف نباتية تمتلك مقاومة طبيعية ضد آفات معينة.</li>
+                                    <li><strong>النظافة الحقلية:</strong> إزالة بقايا النباتات والأعشاب الضارة التي قد تكون مأوى للآفات، وتطهير وتعقيم الأدوات الزراعية.</li>
+                                    <li><strong>تنظيم الري والتسميد:</strong> الممارسات الزراعية السليمة، مثل تنظيم الري والتسميد، تساهم في إنتاج نباتات صحية وقوية قادرة على تحمل الإصابات.</li>
+                                </ul>
+                            </div>
+                            <div class="tab-pane fade" id="mechanical" role="tabpanel" aria-labelledby="mechanical-tab">
+                                <h4>المكافحة الميكانيكية والفيزيائية (Mechanical/Physical Control)</h4>
+                                <p>هي طرق تعتمد على الوسائل المادية للقضاء على الآفات أو منع وصولها إلى النباتات. تشمل:</p>
+                                <ul>
+                                    <li><strong>الإزالة اليدوية:</strong> إزالة الحشرات يدوياً من النباتات، خاصة في الحدائق الصغيرة.</li>
+                                    <li><strong>استخدام المصائد:</strong> مثل المصائد اللاصقة الملونة التي تستخدم لمراقبة تعداد الآفات والكشف المبكر عنها.</li>
+                                    <li><strong>الحواجز المادية:</strong> وضع شباك على أبواب وفتحات التهوية في البيوت المحمية لمنع دخول الحشرات الماصة.</li>
+                                </ul>
+                            </div>
+                            <div class="tab-pane fade" id="biological" role="tabpanel" aria-labelledby="biological-tab">
+                                <h4>المكافحة البيولوجية (Biological Control)</h4>
+                                <p>هي استخدام الكائنات الحية الأخرى للسيطرة على الآفات، وتعتبر من أكثر الطرق أماناً على البيئة. تشمل:</p>
+                                <ul>
+                                    <li><strong>المفترسات:</strong> استخدام حيوانات تتغذى على الآفات، مثل أسد المن الذي يتغذى على حشرات المن.</li>
+                                    <li><strong>الطفيليات:</strong> استخدام كائنات حية تتطفل على الآفات وتقتلها، مثل بعض أنواع الدبابير التي تتطفل على يرقات الفراشات.</li>
+                                    <li><strong>الممرضات:</strong> استخدام مسببات الأمراض مثل الفطريات أو البكتيريا أو الفيروسات التي تصيب الآفات وتقتلها.</li>
+                                </ul>
+                                <p>تتميز المكافحة البيولوجية بأنها مستدامة ولا تترك مخلفات كيميائية في البيئة، ولكنها تتطلب معرفة دقيقة بالعلاقات البيئية بين الكائنات.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم أنواع المبيدات -->
+    <section id="types" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">أقسام المبيدات الكيميائية</h2>
+            
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="interactive-tool">
+                        <h3 class="tool-title">مقدمة في المبيدات الكيميائية</h3>
+                        <p class="tool-description">تُعَدّ المبيدات الكيميائية أداة قوية وضرورية في مكافحة الآفات، ولكنها تتطلب فهماً دقيقاً لأنواعها وتصنيفاتها لضمان استخدامها بفعالية وأمان.</p>
+                        <p>تُستخدم المبيدات الكيميائية عندما تفشل طرق المكافحة الأخرى في السيطرة على تعداد الآفة، أو عندما تتجاوز الإصابة عتبة الضرر الاقتصادي. يجب أن يكون استخدامها هو الملاذ الأخير ضمن استراتيجية متكاملة، حيث تُطبق بشكل مدروس وموجه لتجنب إلحاق الضرر بالبيئة والأعداء الطبيعية للآفات.</p>
+                        <p>يعتمد التطبيق الفعال على اختيار المبيد المناسب لنوع الآفة ومرحلة الإصابة. يجب دائماً الالتزام الصارم بالتعليمات الموضحة على ملصق المبيد، بما في ذلك الجرعة، وطريقة التطبيق، وفترة الأمان قبل الحصاد.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card card-custom">
+                        <div class="card-body card-body-custom text-center">
+                            <i class="fas fa-bug fa-3x text-success mb-3"></i>
+                            <h3 class="card-title card-title-custom">المبيدات الحشرية</h3>
+                            <p class="card-text card-text-custom">مصممة خصيصاً لمكافحة الحشرات.</p>
+                            <h5>أمثلة:</h5>
+                            <ul class="text-start">
+                                <li>إيميداكلوبريد (Imidacloprid)</li>
+                                <li>سايبرمثرين (Cypermethrin)</li>
+                                <li>فيبرونيل (Fipronil)</li>
+                                <li>لامبدا-سيهالوثرين (Lambda-cyhalothrin)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card card-custom">
+                        <div class="card-body card-body-custom text-center">
+                            <i class="fas fa-spider fa-3x text-success mb-3"></i>
+                            <h3 class="card-title card-title-custom">المبيدات الأكاروسية</h3>
+                            <p class="card-text card-text-custom">تستهدف الأكاروسات (العناكب) مثل العنكبوت الأحمر.</p>
+                            <h5>أمثلة:</h5>
+                            <ul class="text-start">
+                                <li>مدمكتين (Medmectin)</li>
+                                <li>روبست (Robost)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card card-custom">
+                        <div class="card-body card-body-custom text-center">
+                            <i class="fas fa-microscope fa-3x text-success mb-3"></i>
+                            <h3 class="card-title card-title-custom">المبيدات النيماتودية</h3>
+                            <p class="card-text card-text-custom">تستهدف الديدان الأسطوانية التي تعيش في التربة.</p>
+                            <h5>أمثلة:</h5>
+                            <ul class="text-start">
+                                <li>نيماسول (Nemasol)</li>
+                                <li>أوكساميل (Oxamyl)</li>
+                                <li>فيناميفوس (Fenamiphos)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card card-custom">
+                        <div class="card-body card-body-custom text-center">
+                            <i class="fas fa-rat fa-3x text-success mb-3"></i>
+                            <h3 class="card-title card-title-custom">مبيدات القوارض</h3>
+                            <p class="card-text card-text-custom">مصممة لقتل القوارض مثل الفئران والجرذان.</p>
+                            <h5>أمثلة:</h5>
+                            <ul class="text-start">
+                                <li>فوسفيد الزنك (Zinc Phosphide)</li>
+                                <li>بروتكت بلس</li>
+                                <li>جاردن توب</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card card-custom">
+                        <div class="card-body card-body-custom text-center">
+                            <i class="fas fa-seedling fa-3x text-success mb-3"></i>
+                            <h3 class="card-title card-title-custom">مبيدات الأعشاب</h3>
+                            <p class="card-text card-text-custom">تستخدم لمكافحة النباتات غير المرغوبة.</p>
+                            <h5>أمثلة:</h5>
+                            <ul class="text-start">
+                                <li>غليفوسات (Glyphosate)</li>
+                                <li>باراكوات (Paraquat)</li>
+                                <li>2,4-D</li>
+                                <li>ديكامبا (Dicamba)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card card-custom">
+                        <div class="card-body card-body-custom text-center">
+                            <i class="fas fa-bacterium fa-3x text-success mb-3"></i>
+                            <h3 class="card-title card-title-custom">المبيدات الفطرية</h3>
+                            <p class="card-text card-text-custom">تستهدف الفطريات والفطريات البيضية.</p>
+                            <h5>أمثلة:</h5>
+                            <ul class="text-start">
+                                <li>هيدروكسيد النحاس (Copper Hydroxide)</li>
+                                <li>كاربندازيم (Carbendazim)</li>
+                                <li>بريفيكيور إنيرجي</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- جدول مطابقة المبيد بالهدف وطريقة التطبيق -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="interactive-tool">
+                        <h3 class="tool-title">جدول مطابقة المبيد بالهدف وطريقة التطبيق</h3>
+                        <div class="table-responsive">
+                            <table class="pesticide-table">
+                                <thead>
+                                    <tr>
+                                        <th>المبيد (مثال)</th>
+                                        <th>المادة الفعالة</th>
+                                        <th>الهدف (الآفة)</th>
+                                        <th>طريقة التطبيق المفضلة</th>
+                                        <th>ملاحظات السلامة</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>فيبرول</td>
+                                        <td>فيبرونيل</td>
+                                        <td>سوسة النخيل، يرقات الديدان، ذبابة الفاكهة</td>
+                                        <td>الرش على الأوراق</td>
+                                        <td><span class="badge bg-warning text-dark">مبيد جهازي</span> فترة تحريم محددة</td>
+                                    </tr>
+                                    <tr>
+                                        <td>نيماسول</td>
+                                        <td>فوثيازيت</td>
+                                        <td>النيماتودا في التربة</td>
+                                        <td>المحببات (GR) في التربة والري</td>
+                                        <td><span class="badge bg-danger">يتطلب فترة أمان طويلة</span> (60 يوماً)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>روبست</td>
+                                        <td>مدمكتين</td>
+                                        <td>الأكاروسات، صانعات الأنفاق</td>
+                                        <td>الرش على المجموع الخضري</td>
+                                        <td><span class="badge bg-success">فعال طويل الأمد</span> يقلل الحاجة لتكرار الرش</td>
+                                    </tr>
+                                    <tr>
+                                        <td>غليفوسات</td>
+                                        <td>غليفوسات</td>
+                                        <td>الأعشاب عريضة الأوراق والنباتات الخشبية</td>
+                                        <td>الرش على الأوراق</td>
+                                        <td><span class="badge bg-warning text-dark">مبيد غير انتقائي</span> يُستخدم لتطهير الأرض</td>
+                                    </tr>
+                                    <tr>
+                                        <td>فوسفيد الزنك</td>
+                                        <td>فوسفيد الزنك</td>
+                                        <td>القوارض (فئران، جرذان)</td>
+                                        <td>الطعوم السامة</td>
+                                        <td><span class="badge bg-danger">شديد السمية</span> يجب التعامل معه بحذر شديد</td>
+                                    </tr>
+                                    <tr>
+                                        <td>بريفيكيور إنيرجي</td>
+                                        <td>بروباموكارب هيدروكلورايد</td>
+                                        <td>أعفان الجذور</td>
+                                        <td>الرش على التربة</td>
+                                        <td><span class="badge bg-info">مبيد فطري جهازي</span> علاجي ووقائي</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم مستحضرات المبيدات -->
+    <section id="formulations" class="section">
+        <div class="container">
+            <h2 class="section-title">مستحضرات المبيدات</h2>
+            
+            <div class="row mb-4">
+                <div class="col-lg-6">
+                    <div class="interactive-tool">
+                        <h3 class="tool-title">ما هي مستحضرات المبيدات؟</h3>
+                        <p class="tool-description">تُعدّ المستحضرات (Formulations) هي الصورة التجارية التي يُباع بها المبيد، وهي مزيج من المادة الفعالة (Active Ingredient) ومواد أخرى مساعدة (Adjuvants).</p>
+                        <p>يُقصد بالمستحضرات الصورة النهائية للمبيد التي تكون جاهزة للاستخدام. تضاف المواد المساعدة لعدة أسباب منها تحسين قابلية الخلط، وزيادة الثبات، وتحسين قدرة المبيد على الانتشار والالتصاق بالأسطح المعالجة.</p>
+                        <p>يُعد فهم المستحضر أمراً بالغ الأهمية للمهندس الزراعي لعدة أسباب:</p>
+                        <ul>
+                            <li><strong>التحضير السليم:</strong> يختلف تحضير محلول الرش باختلاف المستحضر، فمثلاً، تتطلب المساحيق القابلة للبلل طريقة تحضير مختلفة عن المركزات القابلة للاستحلاب.</li>
+                            <li><strong>الفعالية:</strong> تؤثر المواد المساعدة على كفاءة المبيد، فالمواد اللاصقة تزيد من بقاء المبيد على السطح المعالج.</li>
+                            <li><strong>الاستقرار:</strong> معرفة المستحضر تمنع الأخطاء الشائعة مثل استخدام المياه المالحة مع المركزات القابلة للاستحلاب، مما يسبب عدم ثبات المحلول.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="interactive-tool">
+                        <h3 class="tool-title">أنواع المستحضرات</h3>
+                        <p class="tool-description">يتم تمييز المستحضرات عادةً باختصارات على ملصق العبوة، ومن أهمها:</p>
+                        
+                        <div class="formulation-card">
+                            <div class="abbreviation">EC</div>
+                            <h4>المركزات القابلة للاستحلاب</h4>
+                            <p>Emulsifiable Concentrate - وهي سوائل زيتية تتحول إلى مستحلب لبني عند خلطها بالماء.</p>
+                        </div>
+                        
+                        <div class="formulation-card">
+                            <div class="abbreviation">SL</div>
+                            <h4>المحاليل القابلة للذوبان</h4>
+                            <p>Soluble Concentrate - وهي سوائل تذوب تماماً في الماء لتكوين محلول حقيقي.</p>
+                        </div>
+                        
+                        <div class="formulation-card">
+                            <div class="abbreviation">WP</div>
+                            <h4>المساحيق القابلة للبلل</h4>
+                            <p>Wettable Powder - وهي مساحيق تُخلط بالماء لتكوين معلق ثابت.</p>
+                        </div>
+                        
+                        <div class="formulation-card">
+                            <div class="abbreviation">GR</div>
+                            <h4>المحببات</h4>
+                            <p>Granule - وهي حبيبات صلبة تُستخدم غالباً في التربة.</p>
+                        </div>
+                        
+                        <div class="formulation-card">
+                            <div class="abbreviation">WDG</div>
+                            <h4>الحبيبات القابلة للانتشار في الماء</h4>
+                            <p>Water-Dispersible Granule - وهي حبيبات صلبة تتفتت وتنتشر في الماء.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم طرق الاستخدام -->
+    <section id="usage" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">طرق استخدام مبيدات الآفات</h2>
+            
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="interactive-tool">
+                        <h3 class="tool-title">محاكاة تفاعلية لطرق تطبيق المبيدات</h3>
+                        <p class="tool-description">يُعدّ اختيار طريقة التطبيق المناسبة أمراً حيوياً لنجاح عملية المكافحة، حيث أن لكل طريقة مزاياها واشتراطاتها التي تتوافق مع طبيعة الآفة والظروف الميدانية.</p>
+                        
+                        <div class="simulation-container">
+                            <canvas id="simulationCanvas" width="100%" height="400"></canvas>
+                        </div>
+                        
+                        <div class="simulation-controls">
+                            <button class="btn-simulation active" onclick="showSimulation('spray')">الرش</button>
+                            <button class="btn-simulation" onclick="showSimulation('dust')">التعفير</button>
+                            <button class="btn-simulation" onclick="showSimulation('granules')">المحببات</button>
+                            <button class="btn-simulation" onclick="showSimulation('bait')">الطعوم السامة</button>
+                            <button class="btn-simulation" onclick="showSimulation('fumigation')">التدخين</button>
+                        </div>
+                        
+                        <div id="simulationInfo" class="result-box">
+                            <h4>الرش</h4>
+                            <p>الطريقة الأكثر شيوعاً، وتعتمد على تطبيق المبيد في صورة سائلة (مخففة بالماء) باستخدام رشاشات يدوية أو آلية.</p>
+                            <p><strong>مميزات:</strong> تلتصق محاليل الرش بالأسطح المعالجة لمدة أطول مقارنةً بالتعفير، مما يجعلها أكثر كفاءة. يتيح الرش أيضاً توزيعاً متجانساً للمبيد على المجموع الخضري.</p>
+                            <p><strong>طريقة التطبيق:</strong></p>
+                            <ul>
+                                <li>اختيار التوقيت: يُنصح بالرش في الصباح الباكر بعد تطاير الندى أو في المساء، لتجنب درجات الحرارة المرتفعة.</li>
+                                <li>الظروف الجوية: يجب تجنب الرش في الأيام العاصفة أو الممطرة.</li>
+                                <li>حالة النبات: لا يجب رش النباتات وهي في حالة عطش.</li>
+                                <li>التقنية الصحيحة: يجب الرش مع اتجاه الريح لتفادي تعرض العامل لرذاذ المبيد.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card card-custom">
+                        <div class="card-body card-body-custom">
+                            <h3 class="card-title card-title-custom"><i class="fas fa-wind ms-2"></i>التعفير</h3>
+                            <p class="card-text card-text-custom">تطبيق المبيد في صورة مسحوق جاف باستخدام جهاز التعفير. يتميز بسهولة إجرائه في المناطق التي يصعب فيها توفير المياه. كما أن آلات التعفير خفيفة الوزن وأقل تكلفة من المرشات.</p>
+                            <p class="card-text card-text-custom"><strong>التطبيق العملي:</strong> يفضل تطبيق التعفير في الصباح الباكر عندما تكون الأوراق رطبة بالندى، مما يساعد على التصاق المسحوق بالسطح النباتي. يمكن استخدامه لمكافحة آفات الحبوب المخزونة وحشرات المنازل.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card card-custom">
+                        <div class="card-body card-body-custom">
+                            <h3 class="card-title card-title-custom"><i class="fas fa-cubes ms-2"></i>المحببات</h3>
+                            <p class="card-text card-text-custom">تطبيق المبيد في صورة حبيبات صلبة، تُستخدم بشكل أساسي للمكافحة في التربة. تتحلل المحببات ببطء، مما يضمن إطلاق المادة الفعالة على مدى فترة زمنية أطول، مما يوفر حماية مستمرة لجذور النبات من آفات التربة مثل النيماتودا.</p>
+                            <p class="card-text card-text-custom"><strong>التطبيق العملي:</strong> تُضاف الحبيبات حول النباتات أو تُخلط جيداً بالتربة السطحية، ويجب ري التربة بعد التطبيق لضمان وصول المبيد إلى منطقة الجذور.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card card-custom">
+                        <div class="card-body card-body-custom">
+                            <h3 class="card-title card-title-custom"><i class="fas fa-cheese ms-2"></i>الطعوم السامة</h3>
+                            <p class="card-text card-text-custom">مستحضرات يتم فيها خلط مبيد سام مع طعام مفضل للآفة (مادة جاذبة). تُعدّ هذه الطريقة فعالة لمكافحة الآفات التي يصعب الوصول إليها بالرش، مثل القوارض، والديدان القارضة، وذباب الفاكهة.</p>
+                            <p class="card-text card-text-custom"><strong>التطبيق العملي:</strong> يتكون الطعم من قاعدة (مثل النخالة)، ومبيد (مثل فوسفيد الزنك للقوارض)، ومادة جاذبة (مثل المولاس). يتم توزيعه يدوياً في طبقة رقيقة ومنتظمة، مع مراعاة التوقيت المناسب لنشاط الآفة.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card card-custom">
+                        <div class="card-body card-body-custom">
+                            <h3 class="card-title card-title-custom"><i class="fas fa-smog ms-2"></i>التدخين</h3>
+                            <p class="card-text card-text-custom">تحويل المبيد إلى غاز أو دخان ليتغلغل في المساحات المغلقة. تعتبر هذه الطريقة مثالية لتطهير المستودعات، والمطاحن، والصوب الزراعية، والحبوب المخزونة، حيث يصل الغاز إلى الشقوق والأماكن التي يصعب وصول الرش إليها.</p>
+                            <p class="card-text card-text-custom"><strong>التطبيق العملي:</strong> يُستخدم التدخين بمواد غازية جاهزة أو مواد صلبة تتحرر عند تفاعلها مع الرطوبة (مثل فوسفيد الألمونيوم أو المغنيسيوم). يتطلب التطبيق تحت إشراف فني متخصص مع توفير معدات أمان خاصة.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الأدوات التفاعلية -->
+    <section id="tools" class="section">
+        <div class="container">
+            <h2 class="section-title">أدوات تفاعلية</h2>
+            
+            <div class="row">
+                <!-- أداة اختيار المبيد المناسب -->
+                <div class="col-lg-6 mb-4">
+                    <div class="interactive-tool">
+                        <h3 class="tool-title">اختيار المبيد المناسب</h3>
+                        <p class="tool-description">استخدم هذه الأداة لاختيار المبيد الأنسب لنوع الآفة والمحصول.</p>
+                        
+                        <div class="mb-3">
+                            <label for="pestType" class="form-label">نوع الآفة</label>
+                            <select class="form-select" id="pestType">
+                                <option value="">اختر نوع الآفة</option>
+                                <option value="insect">حشرات</option>
+                                <option value="mite">عناكب/أكاروسات</option>
+                                <option value="nematode">نيماتودا</option>
+                                <option value="rodent">قوارض</option>
+                                <option value="fungus">فطريات</option>
+                                <option value="weed">أعشاب</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="cropType" class="form-label">نوع المحصول</label>
+                            <select class="form-select" id="cropType">
+                                <option value="">اختر نوع المحصول</option>
+                                <option value="vegetables">خضروات</option>
+                                <option value="fruits">فواكه</option>
+                                <option value="cereals">محاصيل حقلية</option>
+                                <option value="ornamental">نباتات زينة</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="applicationMethod" class="form-label">طريقة التطبيق المفضلة</label>
+                            <select class="form-select" id="applicationMethod">
+                                <option value="">اختر طريقة التطبيق</option>
+                                <option value="spray">رش</option>
+                                <option value="dust">تعفير</option>
+                                <option value="granules">محببات</option>
+                                <option value="soil">معاملة التربة</option>
+                            </select>
+                        </div>
+                        
+                        <button type="button" class="btn-tool" onclick="findPesticide()">ابحث عن المبيد المناسب</button>
+                        
+                        <div id="pesticideResult" class="result-box" style="display: none;">
+                            <h4>المبيدات المناسبة</h4>
+                            <div id="pesticideList"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- حاسبة جرعات المبيدات -->
+                <div class="col-lg-6 mb-4">
+                    <div class="interactive-tool">
+                        <h3 class="tool-title">حاسبة جرعات المبيدات</h3>
+                        <p class="tool-description">احسب كمية المبيد المطلوبة لمساحتك بدقة.</p>
+                        
+                        <div class="mb-3">
+                            <label for="areaSize" class="form-label">مساحة الأرض (هكتار)</label>
+                            <input type="number" class="form-control" id="areaSize" placeholder="أدخل مساحة الأرض">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="recommendedDose" class="form-label">الجرعة الموصى بها (لتر/هكتار)</label>
+                            <input type="number" class="form-control" id="recommendedDose" placeholder="أدخل الجرعة الموصى بها">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="tankCapacity" class="form-label">سعة خزان الرشاش (لتر)</label>
+                            <input type="number" class="form-control" id="tankCapacity" placeholder="أدخل سعة خزان الرشاش">
+                        </div>
+                        
+                        <button type="button" class="btn-tool" onclick="calculateDose()">احسب الجرعة</button>
+                        
+                        <div id="doseResult" class="result-box" style="display: none;">
+                            <h4>نتيجة الحساب</h4>
+                            <p>كمية المبيد المطلوبة: <span id="pesticideAmount" class="highlight"></span> لتر</p>
+                            <p>كمية الماء المطلوبة: <span id="waterAmount" class="highlight"></span> لتر</p>
+                            <p>عدد الخزانات المطلوبة: <span id="tankCount" class="highlight"></span></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- أداة تحديد فئة سمية المبيد -->
+                <div class="col-lg-6 mb-4">
+                    <div class="interactive-tool">
+                        <h3 class="tool-title">تحديد فئة سمية المبيد</h3>
+                        <p class="tool-description">تعرف على فئة سمية المبيد بناءً على الجرعة المميتة.</p>
+                        
+                        <div class="mb-3">
+                            <label for="ld50" class="form-label">الجرعة المميتة LD50 (ملغم/كجم)</label>
+                            <input type="number" class="form-control" id="ld50" placeholder="أدخل قيمة LD50">
+                        </div>
+                        
+                        <button type="button" class="btn-tool" onclick="determineToxicity()">حدد فئة السمية</button>
+                        
+                        <div id="toxicityResult" class="result-box" style="display: none;">
+                            <h4>فئة السمية</h4>
+                            <div id="toxicityClass"></div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <h4>تصنيف سمية المبيدات حسب منظمة الصحة العالمية</h4>
+                            <div class="row">
+                                <div class="col-6 mb-3">
+                                    <div class="toxicity-card toxicity-ia">
+                                        <h4>الفئة الأولى-أ (Ia)</h4>
+                                        <p>شديدة الخطورة جداً</p>
+                                        <p>LD50 ≤ 5 ملغم/كجم</p>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div class="toxicity-card toxicity-ib">
+                                        <h4>الفئة الأولى-ب (Ib)</h4>
+                                        <p>شديدة الخطورة</p>
+                                        <p>5 < LD50 ≤ 50 ملغم/كجم</p>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div class="toxicity-card toxicity-ii">
+                                        <h4>الفئة الثانية (II)</h4>
+                                        <p>متوسطة الخطورة</p>
+                                        <p>50 < LD50 ≤ 2000 ملغم/كجم</p>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div class="toxicity-card toxicity-iii">
+                                        <h4>الفئة الثالثة (III)</h4>
+                                        <p>قليلة الخطورة</p>
+                                        <p>LD50 > 2000 ملغم/كجم</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- قائمة مرجعية تفاعلية للمهندس الزراعي -->
+                <div class="col-lg-6 mb-4">
+                    <div class="interactive-tool">
+                        <h3 class="tool-title">قائمة مرجعية للمهندس الزراعي</h3>
+                        <p class="tool-description">استخدم هذه القائمة للتأكد من اتباعك لإجراءات السلامة الصحيحة.</p>
+                        
+                        <h5>قبل التطبيق:</h5>
+                        <div class="checklist-item">
+                            <input type="checkbox" class="checklist-checkbox" id="check1">
+                            <label for="check1" class="checklist-text">هل حددت الآفة المستهدفة بدقة؟</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" class="checklist-checkbox" id="check2">
+                            <label for="check2" class="checklist-text">هل تجاوز تعداد الآفة عتبة الضرر الاقتصادي؟</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" class="checklist-checkbox" id="check3">
+                            <label for="check3" class="checklist-text">هل اخترت المبيد المناسب للآفة والمحصول؟</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" class="checklist-checkbox" id="check4">
+                            <label for="check4" class="checklist-text">هل قرأت تعليمات الملصق جيداً؟</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" class="checklist-checkbox" id="check5">
+                            <label for="check5" class="checklist-text">هل الظروف الجوية مناسبة للرش؟</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" class="checklist-checkbox" id="check6">
+                            <label for="check6" class="checklist-text">هل ارتديت معدات الحماية الشخصية الكاملة؟</label>
+                        </div>
+                        
+                        <h5>أثناء التطبيق:</h5>
+                        <div class="checklist-item">
+                            <input type="checkbox" class="checklist-checkbox" id="check7">
+                            <label for="check7" class="checklist-text">هل قمت بالرش مع اتجاه الريح؟</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" class="checklist-checkbox" id="check8">
+                            <label for="check8" class="checklist-text">هل تجنبت الأكل أو الشرب أثناء الرش؟</label>
+                        </div>
+                        
+                        <h5>بعد التطبيق:</h5>
+                        <div class="checklist-item">
+                            <input type="checkbox" class="checklist-checkbox" id="check9">
+                            <label for="check9" class="checklist-text">هل قمت بتنظيف المعدات والأدوات؟</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" class="checklist-checkbox" id="check10">
+                            <label for="check10" class="checklist-text"> هل قمت بالشطف الثلاثي للعبوات الفارغة؟</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input type="checkbox" class="checklist-checkbox" id="check11">
+                            <label for="check11" class="checklist-text">هل خزنت المبيد المتبقي في مكان آمن؟</label>
+                        </div>
+                        
+                        <button type="button" class="btn-tool" onclick="checkChecklist()">تحقق من الإنجاز</button>
+                        
+                        <div id="checklistResult" class="result-box" style="display: none;">
+                            <h4>نتيجة التحقق</h4>
+                            <p>لقد أكملت <span id="checklistScore" class="highlight"></span> من أصل 11 مهمة.</p>
+                            <div id="checklistMessage"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم السلامة -->
+    <section id="safety" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">السلامة عند استخدام المبيدات</h2>
+            
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="interactive-tool">
+                        <h3 class="tool-title">نظام إنذار تفاعلي للإسعافات الأولية</h3>
+                        <p class="tool-description">استخدم هذا النظام للتعرف على إجراءات الإسعافات الأولية في حالات التعرض للمبيدات.</p>
+                        
+                        <div class="mb-3">
+                            <label for="exposureType" class="form-label">نوع التعرض للمبيد</label>
+                            <select class="form-select" id="exposureType">
+                                <option value="">اختر نوع التعرض</option>
+                                <option value="skin">تعرض الجلد</option>
+                                <option value="eye">تعرض العين</option>
+                                <option value="inhalation">استنشاق</option>
+                                <option value="ingestion">ابتلاع</option>
+                            </select>
+                        </div>
+                        
+                        <button type="button" class="btn-tool" onclick="showFirstAid()">عرض إجراءات الإسعافات الأولية</button>
+                        
+                        <div id="firstAidResult" style="display: none;">
+                            <div class="first-aid-alert">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <div class="first-aid-alert-content">
+                                    <h4>تنبيه هام</h4>
+                                    <p>في جميع حالات التسمم، يجب نقل المصاب إلى الهواء الطلق فوراً والاتصال بخدمات الطوارئ أو مركز السموم. يجب إحضار ملصق المبيد مع المصاب لتحديد العلاج المناسب.</p>
+                                </div>
+                            </div>
+                            
+                            <div id="firstAidSteps" class="first-aid-steps">
+                                <!-- سيتم عرض الخطوات هنا -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card card-custom">
+                        <div class="card-body card-body-custom">
+                            <h3 class="card-title card-title-custom"><i class="fas fa-user-shield ms-2"></i>معدات الحماية</h3>
+                            <p class="card-text card-text-custom">ارتداء ملابس واقية، وقفازات، ونظارات واقية، وقناع متخصص للمواد الكيميائية أثناء التعامل مع المبيدات.</p>
+                            <ul class="card-text card-text-custom">
+                                <li>قفازات مقاومة للمواد الكيميائية</li>
+                                <li>نظارات واقية أو وجه واقي</li>
+                                <li>قناع تنفس مرشح</li>
+                                <li>بدلة واقية أو ملابس تغطي الجسم بالكامل</li>
+                                <li>أحذية مقاومة للمواد الكيميائية</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card card-custom">
+                        <div class="card-body card-body-custom">
+                            <h3 class="card-title card-title-custom"><i class="fas fa-warehouse ms-2"></i>تخزين المبيدات</h3>
+                            <p class="card-text card-text-custom">شروط محددة للحفاظ على المبيدات آمنة وفعالة وحمايتها من التلف.</p>
+                            <ul class="card-text card-text-custom">
+                                <li>تخزين المبيدات في مكان آمن، مغلق، وجيد التهوية</li>
+                                <li>بعيداً عن مصادر الحرارة وضوء الشمس المباشر</li>
+                                <li>في عبوته الأصلية بعيداً عن الأغذية</li>
+                                <li>وضع لافتات تحذيرية واضحة</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card card-custom">
+                        <div class="card-body card-body-custom">
+                            <h3 class="card-title card-title-custom"><i class="fas fa-recycle ms-2"></i>التخلص الآمن</h3>
+                            <p class="card-text card-text-custom">اتباع إجراءات التخلص الآمن من عبوات المبيدات الفارغة مثل الشطف الثلاثي والتخريم.</p>
+                            <ul class="card-text card-text-custom">
+                                <li>شطف العبوات ثلاث مرات بالماء</li>
+                                <li>ثقب العبوات لمنع إعادة استخدامها</li>
+                                <li>التخلص منها وفقاً للوائح المحلية</li>
+                                <li>عدم حرق العبوات مطلقاً</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="interactive-tool">
+                        <h3 class="tool-title">جدول مختصر لأهم الاحتياطات والإجراءات الطارئة</h3>
+                        <div class="table-responsive">
+                            <table class="pesticide-table">
+                                <thead>
+                                    <tr>
+                                        <th>نوع التعرض</th>
+                                        <th>الإجراء الإسعافي الفوري</th>
+                                        <th>ملاحظات هامة</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>الجلد</td>
+                                        <td>
+                                            <ul>
+                                                <li>إزالة الملابس الملوثة فوراً</li>
+                                                <li>غسل الجلد بماء متدفق وصابون لمدة 15-20 دقيقة</li>
+                                            </ul>
+                                        </td>
+                                        <td>تجنب فرك الجلد بقوة. لا تضع أي مواد كيميائية أخرى.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>العين</td>
+                                        <td>
+                                            <ul>
+                                                <li>فتح الجفنين والغسيل بماء نظيف وبارد لمدة لا تقل عن 10 دقائق</li>
+                                            </ul>
+                                        </td>
+                                        <td>لا تستخدم أي نوع من القطرات. توجه إلى المستشفى فوراً.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>الاستنشاق</td>
+                                        <td>
+                                            <ul>
+                                                <li>نقل المصاب فوراً إلى هواء نقي</li>
+                                                <li>فك الملابس الضاغطة حول الرقبة والصدر</li>
+                                                <li>في حال توقف التنفس، ابدأ بالتنفس الصناعي</li>
+                                            </ul>
+                                        </td>
+                                        <td>تأكد من تهوية المكان جيداً قبل دخوله.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>الابتلاع</td>
+                                        <td>
+                                            <ul>
+                                                <li>إزالة أي بقايا للمبيد من فم المصاب</li>
+                                                <li>لا تُجبر المصاب على التقيؤ</li>
+                                                <li>الاتصال بخدمات الطوارئ أو مركز السموم فوراً</li>
+                                            </ul>
+                                        </td>
+                                        <td>احتفظ بعبوة المبيد وملصقها لتقديمها للطاقم الطبي.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المكافحة المتكاملة -->
+    <section id="ipm" class="section">
+        <div class="container">
+            <h2 class="section-title">أساسيات المكافحة المتكاملة</h2>
+            
+            <div class="row mb-4">
+                <div class="col-lg-6">
+                    <div class="interactive-tool">
+                        <h3 class="tool-title">ما هي المكافحة المتكاملة للآفات (IPM)؟</h3>
+                        <p class="tool-description">المكافحة المتكاملة للآفات (IPM) هي نهج شامل ومستدام لحماية المحاصيل. لا تقتصر على استخدام المبيدات، بل هي فلسفة زراعية تجمع بين أفضل الممارسات لتحقيق الإنتاجية الزراعية مع الحفاظ على البيئة.</p>
+                        <p>هي نهج بيئي لإنتاج المحاصيل يجمع بين استراتيجيات وطرق إدارة مختلفة لزراعة محاصيل صحية، والتقليل من استخدام المبيدات إلى أدنى مستوى ممكن.</p>
+                        <p>تهدف المكافحة المتكاملة إلى تحقيق عدة أهداف:</p>
+                        <ul>
+                            <li><strong>الاقتصاد:</strong> إدارة أضرار الآفات بأكثر الطرق اقتصاداً، مما يزيد من ربحية المزرعة ويحافظ على الوصول إلى الأسواق.</li>
+                            <li><strong>البيئة:</strong> الحد من الآثار السلبية على صحة الإنسان والبيئة، والحفاظ على التنوع البيولوجي، وتقليل مقاومة الآفات للمبيدات.</li>
+                            <li><strong>الاستدامة:</strong> تشجع على الاعتماد على الآليات الطبيعية لمكافحة الآفات وتساهم في بناء نظام زراعي مرن وصحي.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="interactive-tool">
+                        <h3 class="tool-title">كيف تُطبَّق المكافحة المتكاملة عملياً؟</h3>
+                        <p class="tool-description">يُطبّق نهج المكافحة المتكاملة عبر سلسلة من الخطوات المترابطة:</p>
+                        
+                        <div class="ipm-step">
+                            <h4><i class="fas fa-search"></i> تحديد الآفات (Identify)</h4>
+                            <p>التعرف الصحيح على الآفة المستهدفة وبيولوجيتها هو الخطوة الأولى والأساسية.</p>
+                        </div>
+                        
+                        <div class="ipm-step">
+                            <h4><i class="fas fa-balance-scale"></i> تحديد عتبة العمل (Set Action Thresholds)</h4>
+                            <p>قبل اتخاذ أي إجراء، يتم تحديد مستوى تعداد الآفة أو حجم الضرر الذي يستدعي التدخل. هذا يضمن أن المكافحة لا تتم إلا عند الضرورة القصوى.</p>
+                        </div>
+                        
+                        <div class="ipm-step">
+                            <h4><i class="fas fa-clipboard-check"></i> المراقبة (Monitor)</h4>
+                            <p>الفحص الدوري للحقل لتقييم تعداد الآفات ومقارنته بعتبة العمل.</p>
+                        </div>
+                        
+                        <div class="ipm-step">
+                            <h4><i class="fas fa-shield-alt"></i> الوقاية (Prevention)</h4>
+                            <p>تطبيق الممارسات الوقائية كخط دفاع أول، مثل الدورة الزراعية، واختيار الأصناف المقاومة، والنظافة الحقلية، واستخدام الشباك والمصائد.</p>
+                        </div>
+                        
+                        <div class="ipm-step">
+                            <h4><i class="fas fa-bug"></i> السيطرة (Control)</h4>
+                            <p>إذا فشلت الإجراءات الوقائية، يتم اللجوء إلى المكافحة الفعلية. يتم اختيار الطرق الأقل خطورة أولاً (الميكانيكية، البيولوجية)، ثم يُستخدم المبيد الكيميائي كملاذ أخير، وبشكل انتقائي وموجه.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الاختبار -->
+    <section id="quiz" class="quiz-section">
+        <div class="container">
+            <h2 class="section-title">اختبار معرفتك</h2>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <h3 class="quiz-title">اختبار مبيدات الآفات الزراعية</h3>
+                    <div class="quiz-timer">
+                        <i class="fas fa-clock"></i> الوقت المتبقي: <span id="timer">05:00</span>
+                    </div>
+                    <div class="quiz-progress">
+                        <div class="quiz-progress-bar" id="progress-bar"></div>
+                    </div>
+                </div>
+                
+                <div id="quiz-content">
+                    <!-- سيتم عرض الأسئلة هنا باستخدام JavaScript -->
+                </div>
+                
+                <div class="quiz-navigation">
+                    <button id="prev-btn" class="btn btn-quiz" disabled>
+                        <i class="fas fa-arrow-right"></i> السابق
+                    </button>
+                    <button id="next-btn" class="btn btn-quiz">
+                        التالي <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <button id="submit-btn" class="btn btn-quiz" style="display: none;">
+                        تسليم الاختبار <i class="fas fa-check"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- تذييل الصفحة -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h3 class="footer-title">Thamra Tech</h3>
+                    <p>منصتك الشاملة للمبيدات الزراعية ومكافحة الآفات بأحدث التقنيات وأعلى معايير السلامة.</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/profile.php?id=61579471070182&mibextid=ZbWKwL"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.linkedin.com/in/ahmed-tawheed-165335252?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h3 class="footer-title">روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#about">عن المبيدات</a></li>
+                        <li><a href="#types">أنواع المبيدات</a></li>
+                        <li><a href="#tools">أدوات تفاعلية</a></li>
+                        <li><a href="#safety">السلامة</a></li>
+                        <li><a href="#quiz">الاختبار</a></li>
+                        <li><a href="https://ahmadtawheed.github.io/Library-of-agricultural-articles-thamra/">مقالات</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h3 class="footer-title">مصادر موثوقة</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">كتاب التوصيات المعتمدة لمكافحة الآفات الزراعية</a></li>
+                        <li><a href="#">منصة منظمة الأغذية والزراعة (FAO)</a></li>
+                        <li><a href="#">وزارة الزراعة الأردنية</a></li>
+                        <li><a href="#">المعمل المركزي لتحليل متبقيات المبيدات</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Thamra Tech. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- مكتبات JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script>
+        // إعداد المشهد ثلاثي الأبعاد
+        let scene, camera, renderer, particles;
+        
+        function initThreeJS() {
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0xf1f8e9);
+            
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 5;
+            
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.getElementById('three-container').appendChild(renderer.domElement);
+            
+            // إنشاء جزيئات تشبه الأوراق
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 500;
+            const posArray = new Float32Array(particlesCount * 3);
+            
+            for(let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 10;
+            }
+            
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            
+            // مواد الجزيئات
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.05,
+                color: 0x2e8b57,
+                transparent: true,
+                opacity: 0.8,
+                blending: THREE.AdditiveBlending
+            });
+            
+            particles = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particles);
+            
+            // إضافة إضاءة
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+            
+            const pointLight = new THREE.PointLight(0xffffff, 1);
+            pointLight.position.set(2, 3, 4);
+            scene.add(pointLight);
+            
+            // معالجة تغيير حجم النافذة
+            window.addEventListener('resize', onWindowResize);
+            
+            animate();
+        }
+        
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            particles.rotation.x += 0.001;
+            particles.rotation.y += 0.002;
+            
+            renderer.render(scene, camera);
+        }
+        
+        // تهيئة المشهد عند تحميل الصفحة
+        window.addEventListener('load', initThreeJS);
+        
+        // بيانات الاختبار
+        const quizData = [
+            {
+                question: "ما هو تعريف الآفة في الزراعة؟",
+                options: [
+                    "أي كائن حي يسبب ضرراً مباشراً أو غير مباشر للإنسان، أو لغذائه، أو لممتلكاته",
+                    "الحشرات فقط التي تهاجم المحاصيل",
+                    "الأعشاب الضارة فقط",
+                    "الفطريات فقط التي تسبب أمراض النبات"
+                ],
+                correctAnswer: 0
+            },
+            {
+                question: "ما هو الهدف من المكافحة المتكاملة للآفات (IPM)؟",
+                options: [
+                    "القضاء التام على جميع الآفات",
+                    "تقليل استخدام المبيدات إلى أدنى مستوى ممكن مع الحفاظ على المحاصيل",
+                    "زيادة استخدام المبيدات الكيميائية",
+                    "التركيز على المكافحة البيولوجية فقط"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "ما هي عتبة الضرر الاقتصادي؟",
+                options: [
+                    "الحد الأقصى لأسعار المبيدات",
+                    "مستوى تعداد الآفة الذي يستدعي التدخل لمنع ضرر اقتصادي",
+                    "الحد الأدنى لجودة المحصول",
+                    "الوقت الأمثل لرش المبيدات"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "أي من العوامل التالية تعتبر من العوامل الطبيعية المؤثرة في مكافحة الآفات؟",
+                options: [
+                    "الرياح والأمطار",
+                    "المبيدات الحشرية",
+                    "الأسمدة الكيميائية",
+                    "الآلات الزراعية"
+                ],
+                correctAnswer: 0
+            },
+            {
+                question: "ما هي المكافحة الزراعية (Cultural Control)؟",
+                options: [
+                    "استخدام المبيدات الكيميائية",
+                    "ممارسات مثل الدورة الزراعية واختيار الأصناف المقاومة",
+                    "استخدام الأعداء الحيوية",
+                    "الإزالة اليدوية للآفات"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "ما هي المبيدات الحشرية؟",
+                options: [
+                    "مبيدات مصممة لمكافحة الفطريات",
+                    "مبيدات مصممة لمكافحة الأعشاب",
+                    "مبيدات مصممة لمكافحة الحشرات",
+                    "مبيدات مصممة لمكافحة القوارض"
+                ],
+                correctAnswer: 2
+            },
+            {
+                question: "أي من المبيدات التالية يستخدم لمكافحة العنكبوت الأحمر؟",
+                options: [
+                    "إيميداكلوبريد",
+                    "مدمكتين",
+                    "غليفوسات",
+                    "فوسفيد الزنك"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "ما هي المبيدات النيماتودية؟",
+                options: [
+                    "مبيدات تستهدف الديدان الأسطوانية التي تعيش في التربة",
+                    "مبيدات تستهدف الحشرات الطائرة",
+                    "مبيدات تستهدف الفطريات",
+                    "مبيدات تستهدف الأعشاب"
+                ],
+                correctAnswer: 0
+            },
+            {
+                question: "ما هي المبيدات الفطرية؟",
+                options: [
+                    "مبيدات تستهدف القوارض",
+                    "مبيدات تستهدف الفطريات والفطريات البيضية",
+                    "مبيدات تستهدف الأعشاب",
+                    "مبيدات تستهدف الحشرات"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "ما الفرق بين مبيدات الأعشاب الانتقائية وغير الانتقائية؟",
+                options: [
+                    "الانتقائية تقتل جميع النباتات، غير الانتقائية تقتل أنواع معينة فقط",
+                    "الانتقائية تقتل أنواع معينة من الحشائش دون الإضرار بالمحصول، غير الانتقائية تقتل أي نبات تلامسه",
+                    "لا يوجد فرق بينهما",
+                    "الانتقائية أرخص ثمناً من غير الانتقائية"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "ما هي المستحضرات (Formulations) في المبيدات؟",
+                options: [
+                    "الصورة التجارية التي يُباع بها المبيد، وهي مزيج من المادة الفعالة ومواد أخرى مساعدة",
+                    "العبوات البلاستيكية فقط",
+                    "الملصقات على العبوات",
+                    "الشهادات الصحية للمبيد"
+                ],
+                correctAnswer: 0
+            },
+            {
+                question: "ماذا يعني الرمز (EC) في مستحضرات المبيدات؟",
+                options: [
+                    "المستحضرات الجافة",
+                    "المركزات القابلة للاستحلاب",
+                    "المحاليل القابلة للذوبان",
+                    "الحبيبات"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "متى يفضل تطبيق التعفير؟",
+                options: [
+                    "في منتصف النهار عند ارتفاع درجة الحرارة",
+                    "في الصباح الباكر عندما تكون الأوراق رطبة بالندى",
+                    "في المساء فقط",
+                    "في أي وقت من اليوم"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "ما هي أفضل طريقة لتطبيق المبيدات في التربة لمكافحة النيماتودا؟",
+                options: [
+                    "الرش على الأوراق",
+                    "التعفير",
+                    "المحببات التي تُخلط بالتربة",
+                    "التدخين"
+                ],
+                correctAnswer: 2
+            },
+            {
+                question: "ما هي الإجراءات الواجب مراعاتها عند تحضير محاليل الرش؟",
+                options: [
+                    "استخدام المياه المالحة",
+                    "خلط المبيدات باليد",
+                    "قراءة الملصق وارتداء معدات الحماية الشخصية",
+                    "تحضير كمية كبيرة من المحلول للتخلص منها لاحقاً"
+                ],
+                correctAnswer: 2
+            },
+            {
+                question: "ما هي فئة السمية (Ia) حسب تصنيف منظمة الصحة العالمية؟",
+                options: [
+                    "قليلة الخطورة",
+                    "متوسطة الخطورة",
+                    "شديدة الخطورة",
+                    "شديدة الخطورة جداً"
+                ],
+                correctAnswer: 3
+            },
+            {
+                question: "ما هي الإسعافات الأولية للتسمم الجلدي بالمبيدات؟",
+                options: [
+                    "ترك الجلد كما هو",
+                    "إزالة الملابس الملوثة والغسيل الفوري للجلد بماء متدفق وصابون",
+                    "وضع كمية من المبيد على الجلد",
+                    "تغطية الجلد بقطعة قماش"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "ما هو الشطف الثلاثي (Triple Rinsing)؟",
+                options: [
+                    "غسل العبوات مرة واحدة",
+                    "غسل العبوات ثلاث مرات بالماء وإضافة ماء الشطف إلى خزان الرش",
+                    "غسل العبوات بالمواد الكيميائية",
+                    "عدم غسل العبوات"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "ما هي الخطوة الأولى في تطبيق المكافحة المتكاملة للآفات؟",
+                options: [
+                    "الرش الفوري بالمبيدات",
+                    "التحديد الدقيق للآفة",
+                    "زيادة استخدام الأسمدة",
+                    "قطع جميع النباتات المصابة"
+                ],
+                correctAnswer: 1
+            },
+            {
+                question: "ما هو الهدف الرئيسي من المكافحة المتكاملة للآفات؟",
+                options: [
+                    "زيادة استخدام المبيدات الكيميائية",
+                    "تحقيق التوازن بين الإنتاجية الزراعية والحفاظ على البيئة",
+                    "القضاء التام على جميع الآفات",
+                    "تقليل تكاليف الإنتاج فقط"
+                ],
+                correctAnswer: 1
+            }
+        ];
+        
+        // متغيرات الاختبار
+        let currentQuestion = 0;
+        let userAnswers = [];
+        let score = 0;
+        let timer;
+        let timeLeft = 300; // 5 دقائق بالثواني
+        
+        // تهيئة الاختبار
+        function initQuiz() {
+            currentQuestion = 0;
+            userAnswers = [];
+            score = 0;
+            timeLeft = 300;
+            
+            document.getElementById('prev-btn').disabled = true;
+            document.getElementById('next-btn').style.display = 'inline-block';
+            document.getElementById('submit-btn').style.display = 'none';
+            
+            showQuestion();
+            startTimer();
+        }
+        
+        // عرض السؤال الحالي
+        function showQuestion() {
+            const questionData = quizData[currentQuestion];
+            const quizContent = document.getElementById('quiz-content');
+            
+            // تحديث شريط التقدم
+            const progress = ((currentQuestion + 1) / quizData.length) * 100;
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+            
+            // إنشاء محتوى السؤال
+            let questionHTML = `
+                <div class="question-container">
+                    <h4 class="question-text">سؤال ${currentQuestion + 1} من ${quizData.length}: ${questionData.question}</h4>
+                    <div class="options-container">
+            `;
+            
+            questionData.options.forEach((option, index) => {
+                const isSelected = userAnswers[currentQuestion] === index;
+                questionHTML += `
+                    <div class="answer-option ${isSelected ? 'selected' : ''}" onclick="selectAnswer(${index})">
+                        ${String.fromCharCode(161 + index)}. ${option}
+                    </div>
+                `;
+            });
+            
+            questionHTML += `
+                    </div>
+                </div>
+            `;
+            
+            quizContent.innerHTML = questionHTML;
+            
+            // تحديث أزرار التنقل
+            document.getElementById('prev-btn').disabled = currentQuestion === 0;
+            document.getElementById('next-btn').style.display = currentQuestion === quizData.length - 1 ? 'none' : 'inline-block';
+            document.getElementById('submit-btn').style.display = currentQuestion === quizData.length - 1 ? 'inline-block' : 'none';
+        }
+        
+        // اختيار إجابة
+        function selectAnswer(answerIndex) {
+            userAnswers[currentQuestion] = answerIndex;
+            
+            // تحديث واجهة المستخدم
+            const options = document.querySelectorAll('.answer-option');
+            options.forEach((option, index) => {
+                if (index === answerIndex) {
+                    option.classList.add('selected');
+                } else {
+                    option.classList.remove('selected');
+                }
+            });
+        }
+        
+        // الانتقال للسؤال التالي
+        function nextQuestion() {
+            if (currentQuestion < quizData.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            }
+        }
+        
+        // العودة للسؤال السابق
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+            }
+        }
+        
+        // بدء المؤقت
+        function startTimer() {
+            clearInterval(timer);
+            
+            timer = setInterval(() => {
+                timeLeft--;
+                
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                document.getElementById('timer').textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    submitQuiz();
+                }
+            }, 1000);
+        }
+        
+        // تسليم الاختبار
+        function submitQuiz() {
+            clearInterval(timer);
+            
+            // حساب النتيجة
+            score = 0;
+            for (let i = 0; i < quizData.length; i++) {
+                if (userAnswers[i] === quizData[i].correctAnswer) {
+                    score++;
+                }
+            }
+            
+            // عرض النتيجة
+            showResults();
+        }
+        
+        // عرض نتائج الاختبار
+        function showResults() {
+            const percentage = Math.round((score / quizData.length) * 100);
+            let message = '';
+            
+            if (percentage >= 80) {
+                message = 'ممتاز! لديك معرفة ممتازة بمبيدات الآفات الزراعية.';
+            } else if (percentage >= 60) {
+                message = 'جيد جداً! معلوماتك جيدة ولكن يمكنك تحسينها في بعض المجالات.';
+            } else if (percentage >= 40) {
+                message = 'متوسط. نوصي بمراجعة المزيد من المواد التعليمية حول مبيدات الآفات.';
+            } else {
+                message = 'تحتاج إلى المزيد من الدراسة. نوصي بمراجعة جميع المواد المتعلقة بمبيدات الآفات.';
+            }
+            
+            // إنشاء محتوى النتائج
+            let resultsHTML = `
+                <div class="result-container">
+                    <h3 class="result-title">نتيجة الاختبار</h3>
+                    <div class="result-score">${score}/${quizData.length}</div>
+                    <p class="result-message">${message}</p>
+                    <div class="result-chart">
+                        <canvas id="resultChart"></canvas>
+                    </div>
+                    <div class="result-details">
+                        <h4>تفاصيل الإجابات:</h4>
+            `;
+            
+            // إضافة تفاصيل الإجابات
+            for (let i = 0; i < quizData.length; i++) {
+                const isCorrect = userAnswers[i] === quizData[i].correctAnswer;
+                const statusClass = isCorrect ? 'correct' : 'incorrect';
+                const statusText = isCorrect ? 'صحيح' : 'خطأ';
+                
+                resultsHTML += `
+                    <div class="result-item">
+                        <div class="result-question">سؤال ${i + 1}: ${quizData[i].question}</div>
+                        <div class="result-status ${statusClass}">${statusText}</div>
+                    </div>
+                `;
+                
+                if (!isCorrect) {
+                    resultsHTML += `
+                        <div class="result-item">
+                            <div class="result-question">إجابتك: ${quizData[i].options[userAnswers[i]]}</div>
+                            <div class="result-question">الإجابة الصحيحة: ${quizData[i].options[quizData[i].correctAnswer]}</div>
+                        </div>
+                    `;
+                }
+            }
+            
+            resultsHTML += `
+                    </div>
+                    <button class="btn btn-primary-custom mt-3" onclick="initQuiz()">إعادة الاختبار</button>
+                </div>
+            `;
+            
+            document.getElementById('quiz-content').innerHTML = resultsHTML;
+            document.getElementById('prev-btn').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'none';
+            document.getElementById('submit-btn').style.display = 'none';
+            
+            // إنشاء رسم بياني للنتائج
+            const ctx = document.getElementById('resultChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['إجابات صحيحة', 'إجابات خاطئة'],
+                    datasets: [{
+                        data: [score, quizData.length - score],
+                        backgroundColor: [
+                            '#2E8B57',
+                            '#DC3545'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: {
+                                    family: 'Tajawal',
+                                    size: 14
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // ربط الأحداث
+        document.getElementById('next-btn').addEventListener('click', nextQuestion);
+        document.getElementById('prev-btn').addEventListener('click', prevQuestion);
+        document.getElementById('submit-btn').addEventListener('click', submitQuiz);
+        
+        // تهيئة الاختبار عند تحميل الصفحة
+        window.addEventListener('load', initQuiz);
+        
+        // إضافة تأثير التمرير السلس
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // وظائف الأدوات التفاعلية
+        
+        // أداة اختيار المبيد المناسب
+        function findPesticide() {
+            const pestType = document.getElementById('pestType').value;
+            const cropType = document.getElementById('cropType').value;
+            const applicationMethod = document.getElementById('applicationMethod').value;
+            
+            if (!pestType || !cropType || !applicationMethod) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'تنبيه',
+                    text: 'يرجى اختيار جميع الحقول',
+                    confirmButtonText: 'موافق',
+                    confirmButtonColor: '#2E8B57'
+                });
+                return;
+            }
+            
+            // قاعدة بيانات مبسطة للمبيدات
+            const pesticideDatabase = {
+                insect: {
+                    vegetables: {
+                        spray: ['إيميداكلوبريد', 'سايبرمثرين'],
+                        dust: ['مبيدات حشرية مسحوق'],
+                        granules: ['محببات حشرية للتربة'],
+                        soil: ['جرانولات للتربة']
+                    },
+                    fruits: {
+                        spray: ['لامبدا-سيهالوثرين', 'فيبرونيل'],
+                        dust: ['مساحيق حشرية'],
+                        granules: ['محببات حشرية'],
+                        soil: ['جرانولات للتربة']
+                    },
+                    cereals: {
+                        spray: ['سايبرمثرين', 'إيميداكلوبريد'],
+                        dust: ['مساحيق حشرية'],
+                        granules: ['محببات حشرية'],
+                        soil: ['جرانولات للتربة']
+                    },
+                    ornamental: {
+                        spray: ['إيميداكلوبريد', 'سايبرمثرين'],
+                        dust: ['مساحيق حشرية'],
+                        granules: ['محببات حشرية'],
+                        soil: ['جرانولات للتربة']
+                    }
+                },
+                mite: {
+                    vegetables: {
+                        spray: ['مدمكتين', 'روبست'],
+                        dust: ['كبريت ميكروني'],
+                        granules: ['محببات أكاروسية'],
+                        soil: ['جرانولات للتربة']
+                    },
+                    fruits: {
+                        spray: ['مدمكتين', 'روبست'],
+                        dust: ['كبريت ميكروني'],
+                        granules: ['محببات أكاروسية'],
+                        soil: ['جرانولات للتربة']
+                    },
+                    cereals: {
+                        spray: ['مدمكتين', 'روبست'],
+                        dust: ['كبريت ميكروني'],
+                        granules: ['محببات أكاروسية'],
+                        soil: ['جرانولات للتربة']
+                    },
+                    ornamental: {
+                        spray: ['مدمكتين', 'روبست'],
+                        dust: ['كبريت ميكروني'],
+                        granules: ['محببات أكاروسية'],
+                        soil: ['جرانولات للتربة']
+                    }
+                },
+                nematode: {
+                    vegetables: {
+                        spray: ['أوكساميل'],
+                        dust: ['مساحيق نيماتودية'],
+                        granules: ['نيماسول', 'فيناميفوس'],
+                        soil: ['جرانولات نيماتودية']
+                    },
+                    fruits: {
+                        spray: ['أوكساميل'],
+                        dust: ['مساحيق نيماتودية'],
+                        granules: ['نيماسول', 'فيناميفوس'],
+                        soil: ['جرانولات نيماتودية']
+                    },
+                    cereals: {
+                        spray: ['أوكساميل'],
+                        dust: ['مساحيق نيماتودية'],
+                        granules: ['نيماسول', 'فيناميفوس'],
+                        soil: ['جرانولات نيماتودية']
+                    },
+                    ornamental: {
+                        spray: ['أوكساميل'],
+                        dust: ['مساحيق نيماتودية'],
+                        granules: ['نيماسول', 'فيناميفوس'],
+                        soil: ['جرانولات نيماتودية']
+                    }
+                },
+                rodent: {
+                    vegetables: {
+                        spray: ['-'],
+                        dust: ['-'],
+                        granules: ['طعوم سامة'],
+                        soil: ['طعوم سامة']
+                    },
+                    fruits: {
+                        spray: ['-'],
+                        dust: ['-'],
+                        granules: ['طعوم سامة'],
+                        soil: ['طعوم سامة']
+                    },
+                    cereals: {
+                        spray: ['-'],
+                        dust: ['-'],
+                        granules: ['طعوم سامة'],
+                        soil: ['طعوم سامة']
+                    },
+                    ornamental: {
+                        spray: ['-'],
+                        dust: ['-'],
+                        granules: ['طعوم سامة'],
+                        soil: ['طعوم سامة']
+                    }
+                },
+                fungus: {
+                    vegetables: {
+                        spray: ['هيدروكسيد النحاس', 'كاربندازيم'],
+                        dust: ['مساحيق فطرية'],
+                        granules: ['محببات فطرية'],
+                        soil: ['بريفيكيور إنيرجي']
+                    },
+                    fruits: {
+                        spray: ['هيدروكسيد النحاس', 'كاربندازيم'],
+                        dust: ['مساحيق فطرية'],
+                        granules: ['محببات فطرية'],
+                        soil: ['بريفيكيور إنيرجي']
+                    },
+                    cereals: {
+                        spray: ['هيدروكسيد النحاس', 'كاربندازيم'],
+                        dust: ['مساحيق فطرية'],
+                        granules: ['محببات فطرية'],
+                        soil: ['بريفيكيور إنيرجي']
+                    },
+                    ornamental: {
+                        spray: ['هيدروكسيد النحاس', 'كاربندازيم'],
+                        dust: ['مساحيق فطرية'],
+                        granules: ['محببات فطرية'],
+                        soil: ['بريفيكيور إنيرجي']
+                    }
+                },
+                weed: {
+                    vegetables: {
+                        spray: ['2,4-D', 'كليتوديم'],
+                        dust: ['-'],
+                        granules: ['بنديميثالين'],
+                        soil: ['بنديميثالين']
+                    },
+                    fruits: {
+                        spray: ['غليفوسات', 'ديكامبا'],
+                        dust: ['-'],
+                        granules: ['بنديميثالين'],
+                        soil: ['بنديميثالين']
+                    },
+                    cereals: {
+                        spray: ['2,4-D', 'كليتوديم'],
+                        dust: ['-'],
+                        granules: ['بنديميثالين'],
+                        soil: ['بنديميثالين']
+                    },
+                    ornamental: {
+                        spray: ['غليفوسات'],
+                        dust: ['-'],
+                        granules: ['بنديميثالين'],
+                        soil: ['بنديميثالين']
+                    }
+                }
+            };
+            
+            const pesticides = pesticideDatabase[pestType][cropType][applicationMethod];
+            
+            let pesticideListHTML = '<ul>';
+            pesticides.forEach(pesticide => {
+                pesticideListHTML += `<li>${pesticide}</li>`;
+            });
+            pesticideListHTML += '</ul>';
+            
+            document.getElementById('pesticideList').innerHTML = pesticideListHTML;
+            document.getElementById('pesticideResult').style.display = 'block';
+        }
+        
+        // حاسبة جرعات المبيدات
+        function calculateDose() {
+            const areaSize = parseFloat(document.getElementById('areaSize').value);
+            const recommendedDose = parseFloat(document.getElementById('recommendedDose').value);
+            const tankCapacity = parseFloat(document.getElementById('tankCapacity').value);
+            
+            if (!areaSize || !recommendedDose || !tankCapacity) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'تنبيه',
+                    text: 'يرجى إدخال جميع القيم',
+                    confirmButtonText: 'موافق',
+                    confirmButtonColor: '#2E8B57'
+                });
+                return;
+            }
+            
+            const pesticideAmount = areaSize * recommendedDose;
+            const waterAmount = pesticideAmount / recommendedDose * 200; // افتراض 200 لتر/هكتار
+            const tankCount = Math.ceil(waterAmount / tankCapacity);
+            
+            document.getElementById('pesticideAmount').textContent = pesticideAmount.toFixed(2);
+            document.getElementById('waterAmount').textContent = waterAmount.toFixed(2);
+            document.getElementById('tankCount').textContent = tankCount;
+            document.getElementById('doseResult').style.display = 'block';
+        }
+        
+        // أداة تحديد فئة سمية المبيد
+        function determineToxicity() {
+            const ld50 = parseFloat(document.getElementById('ld50').value);
+            
+            if (!ld50) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'تنبيه',
+                    text: 'يرجى إدخال قيمة LD50',
+                    confirmButtonText: 'موافق',
+                    confirmButtonColor: '#2E8B57'
+                });
+                return;
+            }
+            
+            let toxicityClass, toxicityDescription, toxicityColor;
+            
+            if (ld50 <= 5) {
+                toxicityClass = 'الفئة الأولى-أ (Ia)';
+                toxicityDescription = 'شديدة الخطورة جداً';
+                toxicityColor = '#8B0000';
+            } else if (ld50 <= 50) {
+                toxicityClass = 'الفئة الأولى-ب (Ib)';
+                toxicityDescription = 'شديدة الخطورة';
+                toxicityColor = '#CD5C5C';
+            } else if (ld50 <= 2000) {
+                toxicityClass = 'الفئة الثانية (II)';
+                toxicityDescription = 'متوسطة الخطورة';
+                toxicityColor = '#FF8C00';
+            } else {
+                toxicityClass = 'الفئة الثالثة (III)';
+                toxicityDescription = 'قليلة الخطورة';
+                toxicityColor = '#3CB371';
+            }
+            
+            const toxicityHTML = `
+                <div class="toxicity-card" style="background-color: ${toxicityColor}; color: white;">
+                    <h4>${toxicityClass}</h4>
+                    <p>${toxicityDescription}</p>
+                    <p>قيمة LD50: ${ld50} ملغم/كجم</p>
+                </div>
+            `;
+            
+            document.getElementById('toxicityClass').innerHTML = toxicityHTML;
+            document.getElementById('toxicityResult').style.display = 'block';
+        }
+        
+        // قائمة مرجعية تفاعلية للمهندس الزراعي
+        function checkChecklist() {
+            const checkboxes = document.querySelectorAll('.checklist-checkbox');
+            let checkedCount = 0;
+            
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    checkedCount++;
+                }
+            });
+            
+            const percentage = Math.round((checkedCount / checkboxes.length) * 100);
+            let message = '';
+            
+            if (percentage >= 90) {
+                message = 'ممتاز! أنت تتبع إجراءات السلامة بدقة.';
+            } else if (percentage >= 70) {
+                message = 'جيد جداً! حاول تحسين النقاط المتبقية.';
+            } else if (percentage >= 50) {
+                message = 'متوسط. تحتاج إلى تحسين في العديد من النقاط.';
+            } else {
+                message = 'ضعيف. يجب عليك الاهتمام أكثر بإجراءات السلامة.';
+            }
+            
+            document.getElementById('checklistScore').textContent = checkedCount;
+            document.getElementById('checklistMessage').textContent = message;
+            document.getElementById('checklistResult').style.display = 'block';
+        }
+        
+        // نظام إنذار تفاعلي للإسعافات الأولية
+        function showFirstAid() {
+            const exposureType = document.getElementById('exposureType').value;
+            
+            if (!exposureType) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'تنبيه',
+                    text: 'يرجى اختيار نوع التعرض',
+                    confirmButtonText: 'موافق',
+                    confirmButtonColor: '#2E8B57'
+                });
+                return;
+            }
+            
+            const firstAidSteps = {
+                skin: {
+                    title: 'تسمم الجلد',
+                    steps: [
+                        'إزالة الملابس الملوثة فوراً',
+                        'غسل الجلد بماء متدفق وصابون لمدة 15-20 دقيقة',
+                        'تجنب فرك الجلد بقوة',
+                        'لا تضع أي مواد كيميائية أخرى',
+                        'توجه إلى الطبيب إذا استمرت الأعراض'
+                    ]
+                },
+                eye: {
+                    title: 'تسمم العين',
+                    steps: [
+                        'فتح الجفنين والغسيل بماء نظيف وبارد لمدة لا تقل عن 10 دقائق',
+                        'لا تستخدم أي نوع من القطرات',
+                        'توجه إلى المستشفى فوراً',
+                        'احتفظ بعبوة المبيد للطبيب'
+                    ]
+                },
+                inhalation: {
+                    title: 'تسمم الاستنشاق',
+                    steps: [
+                        'نقل المصاب فوراً إلى مكان جيد التهوية',
+                        'فك الملابس الضاغطة حول الرقبة والصدر',
+                        'في حال توقف التنفس، ابدأ بالتنفس الصناعي',
+                        'تأكد من تهوية المكان جيداً قبل دخوله',
+                        'اتصل بالطوارئ فوراً'
+                    ]
+                },
+                ingestion: {
+                    title: 'تسمم الابتلاع',
+                    steps: [
+                        'إزالة أي بقايا للمبيد من فم المصاب',
+                        'لا تُجبر المصاب على التقيؤ',
+                        'اتصل بخدمات الطوارئ أو مركز السموم فوراً',
+                        'احتفظ بعبوة المبيد وملصقها',
+                        'لا تعطي المصاب أي شيء عن طريق الفم'
+                    ]
+                }
+            };
+            
+            const steps = firstAidSteps[exposureType];
+            
+            let stepsHTML = `
+                <h4>${steps.title}</h4>
+            `;
+            
+            steps.steps.forEach((step, index) => {
+                stepsHTML += `
+                    <div class="step-item">
+                        <div class="step-number">${index + 1}</div>
+                        <div class="step-text">${step}</div>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('firstAidSteps').innerHTML = stepsHTML;
+            document.getElementById('firstAidResult').style.display = 'block';
+        }
+        
+        // محاكاة تفاعلية لطرق تطبيق المبيدات
+        function showSimulation(method) {
+            // تحديث الأزرار النشطة
+            document.querySelectorAll('.btn-simulation').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            const canvas = document.getElementById('simulationCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // مسح المحتوى السابق
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // رسم الخلفية
+            ctx.fillStyle = '#f1f8e9';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // رسم النباتات
+            ctx.fillStyle = '#2E8B57';
+            for (let i = 0; i < 10; i++) {
+                const x = 50 + i * 70;
+                const y = 300;
+                
+                // ساق النبات
+                ctx.fillRect(x, y, 10, 80);
+                
+                // أوراق النبات
+                ctx.beginPath();
+                ctx.arc(x + 5, y - 20, 30, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            
+            // رسم المحاكاة حسب طريقة التطبيق
+            switch(method) {
+                case 'spray':
+                    // رسم رذاذ الرش
+                    ctx.fillStyle = 'rgba(60, 179, 113, 0.5)';
+                    for (let i = 0; i < 50; i++) {
+                        const x = Math.random() * canvas.width;
+                        const y = Math.random() * 250;
+                        const size = Math.random() * 5 + 2;
+                        
+                        ctx.beginPath();
+                        ctx.arc(x, y, size, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                    
+                    // رسم الرشاش
+                    ctx.fillStyle = '#666';
+                    ctx.fillRect(canvas.width / 2 - 30, 100, 60, 100);
+                    ctx.beginPath();
+                    ctx.moveTo(canvas.width / 2 - 30, 100);
+                    ctx.lineTo(canvas.width / 2, 50);
+                    ctx.lineTo(canvas.width / 2 + 30, 100);
+                    ctx.fill();
+                    
+                    // تحديث المعلومات
+                    document.getElementById('simulationInfo').innerHTML = `
+                        <h4>الرش</h4>
+                        <p>الطريقة الأكثر شيوعاً، وتعتمد على تطبيق المبيد في صورة سائلة (مخففة بالماء) باستخدام رشاشات يدوية أو آلية.</p>
+                        <p><strong>مميزات:</strong> تلتصق محاليل الرش بالأسطح المعالجة لمدة أطول مقارنةً بالتعفير، مما يجعلها أكثر كفاءة. يتيح الرش أيضاً توزيعاً متجانساً للمبيد على المجموع الخضري.</p>
+                        <p><strong>طريقة التطبيق:</strong></p>
+                        <ul>
+                            <li>اختيار التوقيت: يُنصح بالرش في الصباح الباكر بعد تطاير الندى أو في المساء، لتجنب درجات الحرارة المرتفعة.</li>
+                            <li>الظروف الجوية: يجب تجنب الرش في الأيام العاصفة أو الممطرة.</li>
+                            <li>حالة النبات: لا يجب رش النباتات وهي في حالة عطش.</li>
+                            <li>التقنية الصحيحة: يجب الرش مع اتجاه الريح لتفادي تعرض العامل لرذاذ المبيد.</li>
+                        </ul>
+                    `;
+                    break;
+                    
+                case 'dust':
+                    // رسم مسحوق التعفير
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                    for (let i = 0; i < 100; i++) {
+                        const x = Math.random() * canvas.width;
+                        const y = Math.random() * 250;
+                        const size = Math.random() * 3 + 1;
+                        
+                        ctx.beginPath();
+                        ctx.arc(x, y, size, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                    
+                    // رسم جهاز التعفير
+                    ctx.fillStyle = '#666';
+                    ctx.fillRect(canvas.width / 2 - 20, 100, 40, 80);
+                    ctx.beginPath();
+                    ctx.arc(canvas.width / 2, 80, 20, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    // تحديث المعلومات
+                    document.getElementById('simulationInfo').innerHTML = `
+                        <h4>التعفير</h4>
+                        <p>تطبيق المبيد في صورة مسحوق جاف باستخدام جهاز التعفير. يتميز بسهولة إجرائه في المناطق التي يصعب فيها توفير المياه. كما أن آلات التعفير خفيفة الوزن وأقل تكلفة من المرشات.</p>
+                        <p><strong>التطبيق العملي:</strong> يفضل تطبيق التعفير في الصباح الباكر عندما تكون الأوراق رطبة بالندى، مما يساعد على التصاق المسحوق بالسطح النباتي. يمكن استخدامه لمكافحة آفات الحبوب المخزونة وحشرات المنازل.</p>
+                    `;
+                    break;
+                    
+                case 'granules':
+                    // رسم حبيبات
+                    ctx.fillStyle = '#8B4513';
+                    for (let i = 0; i < 30; i++) {
+                        const x = Math.random() * canvas.width;
+                        const y = 300 + Math.random() * 50;
+                        const size = Math.random() * 5 + 3;
+                        
+                        ctx.beginPath();
+                        ctx.arc(x, y, size, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                    
+                    // رسم التربة
+                    ctx.fillStyle = '#8B4513';
+                    ctx.fillRect(0, 350, canvas.width, 50);
+                    
+                    // تحديث المعلومات
+                    document.getElementById('simulationInfo').innerHTML = `
+                        <h4>المحببات</h4>
+                        <p>تطبيق المبيد في صورة حبيبات صلبة، تُستخدم بشكل أساسي للمكافحة في التربة. تتحلل المحببات ببطء، مما يضمن إطلاق المادة الفعالة على مدى فترة زمنية أطول، مما يوفر حماية مستمرة لجذور النبات من آفات التربة مثل النيماتودا.</p>
+                        <p><strong>التطبيق العملي:</strong> تُضاف الحبيبات حول النباتات أو تُخلط جيداً بالتربة السطحية، ويجب ري التربة بعد التطبيق لضمان وصول المبيد إلى منطقة الجذور.</p>
+                    `;
+                    break;
+                    
+                case 'bait':
+                    // رسم الطعوم
+                    ctx.fillStyle = '#FF6347';
+                    for (let i = 0; i < 10; i++) {
+                        const x = 50 + i * 70;
+                        const y = 350;
+                        
+                        ctx.beginPath();
+                        ctx.arc(x, y, 10, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                    
+                    // رسم التربة
+                    ctx.fillStyle = '#8B4513';
+                    ctx.fillRect(0, 350, canvas.width, 50);
+                    
+                    // تحديث المعلومات
+                    document.getElementById('simulationInfo').innerHTML = `
+                        <h4>الطعوم السامة</h4>
+                        <p>مستحضرات يتم فيها خلط مبيد سام مع طعام مفضل للآفة (مادة جاذبة). تُعدّ هذه الطريقة فعالة لمكافحة الآفات التي يصعب الوصول إليها بالرش، مثل القوارض، والديدان القارضة، وذباب الفاكهة.</p>
+                        <p><strong>التطبيق العملي:</strong> يتكون الطعم من قاعدة (مثل النخالة)، ومبيد (مثل فوسفيد الزنك للقوارض)، ومادة جاذبة (مثل المولاس). يتم توزيعه يدوياً في طبقة رقيقة ومنتظمة، مع مراعاة التوقيت المناسب لنشاط الآفة.</p>
+                    `;
+                    break;
+                    
+                case 'fumigation':
+                    // رسم دخان
+                    ctx.fillStyle = 'rgba(128, 128, 128, 0.3)';
+                    for (let i = 0; i < 100; i++) {
+                        const x = Math.random() * canvas.width;
+                        const y = Math.random() * canvas.height;
+                        const size = Math.random() * 20 + 5;
+                        
+                        ctx.beginPath();
+                        ctx.arc(x, y, size, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                    
+                    // رسم مستودع
+                    ctx.fillStyle = '#666';
+                    ctx.fillRect(100, 100, canvas.width - 200, canvas.height - 200);
+                    
+                    // تحديث المعلومات
+                    document.getElementById('simulationInfo').innerHTML = `
+                        <h4>التدخين</h4>
+                        <p>تحويل المبيد إلى غاز أو دخان ليتغلغل في المساحات المغلقة. تعتبر هذه الطريقة مثالية لتطهير المستودعات، والمطاحن، والصوب الزراعية، والحبوب المخزونة، حيث يصل الغاز إلى الشقوق والأماكن التي يصعب وصول الرش إليها.</p>
+                        <p><strong>التطبيق العملي:</strong> يُستخدم التدخين بمواد غازية جاهزة أو مواد صلبة تتحرر عند تفاعلها مع الرطوبة (مثل فوسفيد الألمونيوم أو المغنيسيوم). يتطلب التطبيق تحت إشراف فني متخصص مع توفير معدات أمان خاصة.</p>
+                    `;
+                    break;
+            }
+        }
+        
+        // تهيئة المحاكاة عند تحميل الصفحة
+        window.addEventListener('load', function() {
+            const canvas = document.getElementById('simulationCanvas');
+            canvas.width = canvas.offsetWidth;
+            canvas.height = 400;
+            
+            // عرض محاكاة الرش كافتراضية
+            showSimulation('spray');
+        });
+    </script>
+</body>
+</html>
